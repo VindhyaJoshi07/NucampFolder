@@ -11,9 +11,6 @@
     <script>
         let COLORS_ARRAY = ['blue','gold','cyan','gray','green','magenta','orange','red','white','yellow'];
 
-        // separating the array items using comma and space
-        COLORS_ARRAY.join(' , ');
-        console.log(COLORS_ARRAY);
 
         // sorting the array items in alphabetical order
         COLORS_ARRAY = COLORS_ARRAY.sort();
@@ -27,7 +24,7 @@
             let numOfTries = 0;
 
             do{
-                guess = prompt('Iam thinking of one of these colors: \n\n' + COLORS_ARRAY +'\n\nWhat color am I thinking of?\n');
+                guess = prompt('Iam thinking of one of these colors: \n\n' + COLORS_ARRAY.join(' , ') +'\n\nWhat color am I thinking of?\n');
                 guess = guess.toLowerCase();
 
                 if(guess === null || typeof(guess) === "number" || guess === ''){
