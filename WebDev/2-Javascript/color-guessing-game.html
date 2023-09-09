@@ -9,28 +9,29 @@
     <h1>Color Guessing Game</h1>
     <button type="button" onclick="runGame()">Start Game</button>
     <script>
-        const COLORS_ARRAY = ['blue','gold','cyan','gray','green','magenta','orange','red','white','yellow'];
+        let COLORS_ARRAY = ['blue','gold','cyan','gray','green','magenta','orange','red','white','yellow'];
 
-        // separating the array items using comma and space
-        COLORS_ARRAY.join(', ');
-        console.log(COLORS_ARRAY);
+        /* // separating the array items using comma and space
+        COLORS_ARRAY = COLORS_ARRAY.join(', ');
 
         // sorting in alphabetical order
-        COLORS_ARRAY.sort();
-        console.log(COLORS_ARRAY);
+        COLORS_ARRAY = COLORS_ARRAY.sort();
+        */
+        
 
         function runGame(){
             let guess = '';
             let correct = false;
-            const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length-1);
+            const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length);
+            console.log(targetIndex);
             const target = COLORS_ARRAY[targetIndex];
             let numOfTries = 0;
 
             do{
                 guess = prompt('Iam thinking of one of these colors: \n\n' + COLORS_ARRAY +'\n\nWhat color am I thinking of?\n');
-
                 guess = guess.toLowerCase();
-                if(guess === null){
+
+                if(guess === null || typeof(guess) === "number" || guess === ''){
                     alert('Please choose a color');
                     return;
                 }
@@ -38,12 +39,13 @@
                 correct = checkGuess(guess, target);
             }while(!correct);
             alert('You have guessed it correctly\n\n the color is: ' + target + '\n\n It took: ' + numOfTries + 'tries to guess');
+            document.body.style.background = guess;
         }
 
         function checkGuess(guess, target){
             let correct = false;
 
-            if(COLORS_ARRAY.includes(guess) === false){
+            if(!COLORS_ARRAY.includes(guess)){
                 alert("Please choose a color from the above list");
             }
             else if(guess > target){
@@ -54,7 +56,7 @@
             }
             else{
                 correct = true;
-                document.body.style.background = guess;
+                
             }
             return correct;
 
