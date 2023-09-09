@@ -11,10 +11,11 @@
     <script>
         let COLORS_ARRAY = ['blue','gold','cyan','gray','green','magenta','orange','red','white','yellow'];
 
-        // sorting in alphabetical order
-        COLORS_ARRAY = COLORS_ARRAY.sort();
+        // separating the array items using comma and space
+        COLORS_ARRAY.join(', ');
 
-         
+        // sorting the array items in alphabetical order
+        COLORS_ARRAY = COLORS_ARRAY.sort();
 
         function runGame(){
             let guess = '';
