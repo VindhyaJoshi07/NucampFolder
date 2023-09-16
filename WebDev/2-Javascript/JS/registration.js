@@ -39,8 +39,8 @@ class Bootcamp {
             return false;
         }
         console.log(`The students registered in ${this.name} bootcamp are: `);
-        for(let studentList of this.students){
-            console.log(`name : ${studentList.name} email : ${studentList.email}`);
+        for(let student of this.students){
+            console.log(`name : ${student.name} email : ${student.email}`);
         }
         return true;
     }
@@ -55,6 +55,7 @@ class Bootcamp {
                 if(this.students[i].email === email){
                     this.students.splice(i, 1);
                     console.log(`The student with email: ${email} has been removed`);
+                    break;
                 }
             }    
     }
@@ -89,7 +90,7 @@ const runTest = (bootcamp, student) => {
     if(bootcamp.listStudents()){
         console.log("TASK 4 : PASS 1/2");
     }
-   // bootcamp.students = [];
+    bootcamp.students = [];
     if(!bootcamp.listStudents()){
         console.log("TASK 4 : PASS 2/2");
     }
