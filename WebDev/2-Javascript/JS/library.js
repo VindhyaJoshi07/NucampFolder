@@ -14,7 +14,7 @@ class Library {
     addBook(book){
         if(book instanceof Books){
             this.books.push(book);
-            console.log(`${book.title} has been  added to the library`);
+            console.log(`${book.title} has been  added to the library. \n`);
         }
         else {
             console.log('Invalid Book object. Please enter correct details.');
@@ -26,13 +26,13 @@ class Library {
             for(let book of this.books){
                 if(book.title === title && book.available){
                     found = true;
-                    bookTitle.available = false;
+                    book.available = false;
                     console.log(`Checked out : ${book.title}`);
                     break;
                 }
             }
             if(!found){
-                throw new Error(`The book: "${title}" was not found or already checked out`);
+                throw new Error(`The book: "${title}" was not found or already checked out. \n`);
             }
         }
         catch(error){
@@ -47,7 +47,7 @@ class Library {
                 bookList.push(book.title);
             }
         }
-        console.log(`There are ${bookList.length} titles currently on the shelf: ${bookList.join(", ")}`);
+        console.log(`There are ${bookList.length} titles currently on the shelf: \n ${bookList.join(", ")}`);
     }
     
 }
@@ -60,12 +60,15 @@ const newBooks =
     {"title": "The Principles of Object-Oriented JavaScript", "author": "Nicholas C. Zakas"}
 ]`;
 
+
+
  receiveBooks = function(newBooks) {
-    console.log(`Adding new books in our library!`);
+    console.log(`Adding new books in our library!\n`);
 
     const booksToAdd = JSON.parse(newBooks);
-    for(let book of booksToAdd){
-        libraryObject.addBook(book.title, book.author);
+    
+    for(let i=0; i < booksToAdd.length; i++){
+        libraryObject.addBook(new Books(booksToAdd[i].title, booksToAdd[i].author));
     }
 }
 
@@ -89,9 +92,10 @@ receiveBooks(newBooks);
 
 
 
-/*console.log(`There are currently ${library.books.length} books in the library's database.`);
-libraryObject.addBook("Eloquent JavaScript", "Marijn Haverbeke");
+console.log(`There are currently ${libraryObject.books.length} books in the library's database.\n`);
+libraryObject.addBook(new Books("Eloquent JavaScript", "Marijn Haverbeke"));
 receiveBooks(newBooks);
 libraryObject.checkOutBook("Eloquent JavaScript");
 libraryObject.checkOutBook("Grokking the Coding Interview");
-libraryObject.getAvailableBooks(); */
+
+libraryObject.getAvailableBooks();
