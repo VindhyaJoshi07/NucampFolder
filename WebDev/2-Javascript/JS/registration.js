@@ -90,7 +90,7 @@ const runTest = (bootcamp, student) => {
     if(bootcamp.listStudents()){
         console.log("TASK 4 : PASS 1/2");
     }
-    bootcamp.students = [];
+   // bootcamp.students = [];
     if(!bootcamp.listStudents()){
         console.log("TASK 4 : PASS 2/2");
     }
