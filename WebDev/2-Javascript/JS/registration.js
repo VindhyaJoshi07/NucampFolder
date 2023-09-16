@@ -50,14 +50,13 @@ class Bootcamp {
     }
 
     removeStudent(email){
-        if(this.students instanceof Bootcamp){
+            console.log(this.students);
             for(let i = 0; i< this.students.length; i++){
                 if(this.students[i].email === email){
                     this.students.splice(i, 1);
+                    console.log(`The student with email: ${email} has been removed`);
                 }
-            }
-            console.log(`The student with ${this.email} has been removed`);
-        }
+            }    
     }
 }
 
@@ -90,13 +89,13 @@ const runTest = (bootcamp, student) => {
     if(bootcamp.listStudents()){
         console.log("TASK 4 : PASS 1/2");
     }
-    bootcamp.students = [];
+   // bootcamp.students = [];
     if(!bootcamp.listStudents()){
         console.log("TASK 4 : PASS 2/2");
     }
 
     bootcamp.getInfo();
-    bootcamp.removeStudent("babs@bunny.com");
+    bootcamp.removeStudent(testStudent.email);
 
 };
 
