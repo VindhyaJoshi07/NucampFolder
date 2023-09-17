@@ -90,7 +90,7 @@ const runTest = (bootcamp, student) => {
     if(bootcamp.listStudents()){
         console.log("TASK 4 : PASS 1/2");
     }
-   // bootcamp.students = [];
+   //bootcamp.students = []; // We can comment this line to execute removeStudent()
     if(!bootcamp.listStudents()){
         console.log("TASK 4 : PASS 2/2");
     }
