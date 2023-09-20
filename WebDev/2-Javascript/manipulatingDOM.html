@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulating Nodes</title>
+</head>
+<body>
+    <p id="firstP" onclick="newElement()"> Click here to get the new element </p>
+    <p id="secondP" onclick="newText()"> Click here to get the text </p>
+
+    <script>
+        function newElement(){
+            const newEl = document.createElement('hr');
+            const parentNode = document.querySelector('#firstP');
+            parentNode.insertBefore(newEl, parentNode.firstChild);
+        }
+        function newText(){
+            const newText = document.createTextNode('This is dynamically added text!');
+            const parentNode = document.getElementById('secondP');
+            parentNode.appendChild(newText); 
+        }
+    </script>
+</body>
+
+</html>
