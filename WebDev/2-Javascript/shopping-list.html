@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List App</title>
+    <style>
+        ul {
+            list-style-type: "\2610 ";
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1> My Shopping List </h1>
+    <form id="myForm">
+        <label for="item"> Add an item: </label>
+        <input type="text" id="item" name="item">
+        <button type="button" id="addItem" onclick="getItem()"> Add </button>
+    </form>
+    <ul id="shoppingList">
+        <!-- list items will go into this ul via DOM manipulation -->
+        <li> cake </li>
+        <li> candy </li>
+        <li> ice cream </li>
+        <li> party hats </li>
+        <li> pizza </li>
+    </ul>
+    <script>
+        
+        function getItem(){
+            event.preventDefault();
+            const item = document.getElementById("item").value;
+            console.log(item);
+        }
+    </script>
+</body>
+</html>
