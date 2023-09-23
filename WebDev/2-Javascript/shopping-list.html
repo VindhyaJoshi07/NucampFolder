@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,14 @@
         }
     </style>
 </head>
+
 <body>
     <h1> My Shopping List </h1>
     <form id="myForm">
         <label for="item"> Add an item: </label>
         <input type="text" id="item" name="item">
         <button type="button" id="addItem" onclick="getItem()"> Add </button>
+
     </form>
     <ul id="shoppingList">
         <!-- list items will go into this ul via DOM manipulation -->
@@ -27,12 +30,68 @@
         <li> pizza </li>
     </ul>
     <script>
-        
-        function getItem(){
-            event.preventDefault();
-            const item = document.getElementById("item").value;
-            console.log(item);
+        const shoppingListArray = [];
+        const shoppingList = document.getElementById("shoppingList");
+
+        function getItem() {
+            try {
+                event.preventDefault();
+                const item = document.getElementById("item").value;
+
+                if (!shoppingListArray.includes(item)) {
+                    console.log(shoppingListArray);
+                    shoppingListArray.push(item);
+                    shoppingListArray.sort();
+
+                    document.getElementById("myForm").reset();
+
+                    removeList();
+                    makeList();
+                }
+            }
+            catch (error) {
+                console.log(error.message);
+            }
         }
+
+
+        function makeList() {
+
+            for (let item of shoppingListArray) {
+
+                const listItem = document.createElement("li");
+                listItem.textContent = item;
+                listItem.addEventListener("click", removeItem);
+                shoppingList.appendChild(listItem);
+            }
+        }
+        function removeList() {
+            while (shoppingList.firstChild) {
+                shoppingList.removeChild(shoppingList.firstChild);
+            }
+        }
+
+        function removeItem(event) {
+            const itemValue = event.currentTarget.textContent;
+
+            const index = shoppingListArray.indexOf(itemValue);
+
+            if (index !== -1) {
+                try {
+                    shoppingListArray.splice(index, 1);
+
+                    removeList();
+                    makeList();
+                } catch (error) {
+                    console.log(error.message);
+                }
+            } else {
+                console.log("Item not found in the list..");
+            }
+
+        }
+
     </script>
 </body>
+
 </html>
