@@ -72,23 +72,27 @@
         }
 
         function removeItem(event) {
-            const itemValue = event.currentTarget.textContent;
+            try {
+                const itemValue = event.currentTarget.textContent;
 
-            const index = shoppingListArray.indexOf(itemValue);
+                const index = shoppingListArray.indexOf(itemValue);
 
-            if (index !== -1) {
-                try {
+                if (index !== -1) {
+
                     shoppingListArray.splice(index, 1);
 
                     removeList();
                     makeList();
-                } catch (error) {
-                    console.log(error.message);
                 }
-            } else {
-                console.log("Item not found in the list..");
+                else {
+                    throw new Error(`Item ${itemValue} not found in the list..`);
+                }
             }
+            catch (error) {
+                console.log(error.message);
 
+
+            }
         }
 
     </script>
