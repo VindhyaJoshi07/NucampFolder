@@ -1,96 +1,91 @@
 import { useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Button, Modal, ModalHeader } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Label } from "reactstrap";
 import { validateCommentForm } from "../../utils/validateCommentForm";
-
+import { commentsForms } from '../../components/commentsForms.css';
 
 const CommentForm = ({ campsiteId }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleSubmit = (values) => {
+    const comment = {
+      campsiteId: parseInt(campsiteId),
+      rating: values.rating,
+      author: values.author,
+      text: values.commentText,
+    };
+    console.log(comment);
+    setModalOpen(false);
+  };
 
-    const [modalOpen, setModalOpen] = useState(false);
-    const handleSubmit = (values) => {
-        const comment = {
-            campsiteId: parseInt(campsiteId),
-            rating: values.rating,
-            author: values.author,
-            text: values.commentText
-        };
-        console.log(comment);
-        setModalOpen(false);
-    }
+  const initialValues = {
+    rating: undefined,
+    author: "",
+    commentText: "",
+  };
 
-    const initialValues = {
-        rating: undefined,
-        author: '',
-        commentText: ''
-    }
+  return (
+    <>
+      <Button outline onClick={() => setModalOpen(true)}>
+        <i className="fa fa-pencil fa-lg" /> Add Comment
+      </Button>
+      <Modal isOpen={modalOpen}>
+        <ModalHeader toggle={() => setModalOpen(false)}>
+          Add Comment
+        </ModalHeader>
 
-    return(
-        <>
-        <Button outline onClick = {() => setModalOpen(true)}>
-        <i className='fa fa-pencil fa-lg' /> Add Comment
-        </Button>
-        <Modal isOpen={modalOpen}>
-            <ModalHeader toggle={()=> setModalOpen(false)}>Add Comment</ModalHeader>
-            {/* <ModalBody>campsite: {campsiteId}</ModalBody> */}
-            <Formik 
-            initialValues={initialValues}
-            onSubmit= {handleSubmit}>
-                validate={validateCommentForm}
-                <Form>
-                    <FormGroup>
-                        <Label htmlFor="rating"> Rating </Label>
-                        <Field
-                            name='rating'
-                            as='select'
-                            className='form-control'
-                        >
-                            <option>Select...</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+        {/* <ModalBody>campsite: {campsiteId}</ModalBody> */}
 
-                        </Field>
+        <Formik 
+            initialValues={initialValues} 
+            onSubmit={handleSubmit}
+            validate={validateCommentForm}
+        >
+          <Form>
+            <FormGroup>
+              <Label htmlFor="rating"> Rating </Label>
+              <Field name="rating" as="select" className="form-control">
+                <option>Select...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </Field>
+              <ErrorMessage name="rating">
+                {(msg) => <p className="text-danger">{msg}</p>}
+              </ErrorMessage>
+            </FormGroup>
 
-                        <ErrorMessage name="rating">
-                            {(msg) => <p className='text-danger'>{msg}</p>}
-                        </ErrorMessage>
+            <FormGroup>
+              <Label htmlFor="author"> Your Name </Label>
+              <Field
+                name="author"
+                placeholder="Your Name"
+                className="form-control"
+              />
+              <ErrorMessage name="author">
+                {(msg) => <p className="text-danger">{msg}</p>}
+              </ErrorMessage>
+            </FormGroup>
 
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label htmlFor="author"> Your Name </Label>
-                        <Field
-                            name='author'
-                            placeholder='Your Name'
-                            className='form-control'
-                        />
-
-                        <ErrorMessage name="author">
-                            {(msg) => <p className='text-danger'>{msg}</p>}
-                        </ErrorMessage>
-                        
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label htmlFor="commentText"> Comment </Label>
-                        <Field
-                            name='commentText'
-                            as='textarea'
-                            rows='12'
-                            className='form-control'
-                        />
-                    </FormGroup>
-                    <Button type='submit' color='primary'>
-                                Submit
-                    </Button>
-                </Form>
-            </Formik>
-        </Modal>
-        </>
-    )
-}
+            <FormGroup>
+              <Label htmlFor="commentText"> Comment </Label>
+              <Field
+                name="commentText"
+                as="textarea"
+                rows="12"
+                className="form-control"
+              />
+            </FormGroup>
+            <Button type="submit" color="primary">
+              Submit
+            </Button>
+          </Form>
+        </Formik>
+      </Modal>
+    </>
+  );
+};
 
 export default CommentForm;
