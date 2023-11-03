@@ -1,4 +1,3 @@
-import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { Col } from "reactstrap";
 import Comment from "./Comment";
 import { selectCommentsByCampsiteId } from "./commentsSlice";
