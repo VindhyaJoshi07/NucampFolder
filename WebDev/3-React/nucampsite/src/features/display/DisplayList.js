@@ -5,7 +5,9 @@ import AnimatedDisplayCard from './AnimatedDisplayCard';
 import { selectFeaturedCampsite } from '../campsites/campsitesSlice';
 import { selectFeaturedPromotion } from '../promotions/promotionsSlice';
 import { selectFeaturedPartner } from '../partners/partnersSlice';
-const DisplayList = () => {
+
+
+const DisplayList = ({ featuredItem }) => {
     const items = useSelector((state) => [
         selectFeaturedCampsite(state), 
         selectFeaturedPromotion(state), 
@@ -16,6 +18,7 @@ const DisplayList = () => {
 
     
     return (
+        featuredItem &&(
         <Row>
             {items.map((item, idx) => {
                 return (
@@ -26,6 +29,7 @@ const DisplayList = () => {
                 );
             })}
         </Row>
+        )
     );
 };
 
