@@ -3,9 +3,33 @@ import Comment from "./Comment";
 import { selectCommentsByCampsiteId } from "./commentsSlice";
 import CommentForm from "./CommentForm";
 import { useSelector } from "react-redux";
+import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 const CommentsList = ({ campsiteId }) => {
     const comments = useSelector(selectCommentsByCampsiteId(campsiteId));
+    console.log('comments: ', comments);
+
+
+const isLoading = useSelector((state) => state.comments.isLoading);
+const errMsg = useSelector((state) => state.comments.errMsg);
+
+
+if(isLoading) {
+    return(
+        <Col>
+            <Loading />
+        </Col>
+    );
+}
+
+if(errMsg) {
+    return(
+        <Col>
+            <Error errMsg={errMsg} />
+        </Col>
+    )
+}
 
     if(comments &&  comments.length > 0){
         return (
@@ -17,7 +41,9 @@ const CommentsList = ({ campsiteId }) => {
                 <CommentForm campsiteId={campsiteId}></CommentForm>
             </Col>
         )
-    }
+    
+}
+
     return (
         <Col md="5" className="m-1">
             There are no comments for this campsite yet.
